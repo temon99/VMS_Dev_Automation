@@ -5,10 +5,15 @@ Cypress.Commands.add('User_Create',()=>{
     cy.xpath ("//input[@name='lastName']"). type('Emon')
     cy.xpath("//input[@name='companyName']").type('Vivasoft Ltd')
     cy.xpath("//span[normalize-space()='Select department']").click()
-
-
-
-
-
-
+    cy.xpath("//div[@role='presentation']").contains('IT').click().wait(2000)
+    cy.xpath("//input[@name='email']").type('tanzim@gmail.com')
+    cy.xpath("//input[@name='phoneNumber']").type('01676260538')
+    cy.xpath("//span[normalize-space()='Select preferred payment']").click()
+    cy.xpath("//div[@role='presentation']").contains('Cash').click().wait(2000)
+    cy.xpath("//input[@name='currentAddress']").type('abcdefghijaklmnopqrst')
+    cy.xpath("//span[normalize-space()='Select assigned vehicle']").click()
+    cy.xpath("//div[@role='presentation']").contains('Car One').click()
+    cy.xpath("//span[normalize-space()='Select assigned driver']").click()
+    cy.xpath("//div[@role='presentation']").contains('Abdul Malek').click()
+    cy.xpath("//button[normalize-space()='Save']").click()
 })
