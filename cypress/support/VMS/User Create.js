@@ -1,12 +1,21 @@
+// let testData= {}
+// before(function(){
+//     cy.fixture('ConfigData.json').as('ConfigData').then(function(data){
+//         testData.data =data
+//     })
+// })
+
+import {faker} from "@faker-js/faker";
+const firstname = faker.person.firstName('male')
 Cypress.Commands.add('User_Create',()=>{
-    cy.get(':nth-child(1) > div > .relative > .h-full > span').click()
+    cy.get(':nth-child(1) > div > .relative > .h-full > span').click() //
     cy.get('.flex-row > .bg-red-500').click()
-    cy.xpath("//input[@name='firstName']").type('Tanzim')
+    cy.xpath("//input[@name='firstName']").type(firstname) // firstname
     cy.xpath ("//input[@name='lastName']"). type('Emon')
     cy.xpath("//input[@name='companyName']").type('Vivasoft Ltd')
     cy.xpath("//span[normalize-space()='Select department']").click()
     cy.xpath("//div[@role='presentation']").contains('IT').click().wait(2000)
-    cy.xpath("//input[@name='email']").type('tanzim@gmail.com')
+    cy.xpath("//input[@name='email']").type(faker.internet.exampleEmail({allowSpecialCharacters: true}))
     cy.xpath("//input[@name='phoneNumber']").type('01676260538')
     cy.xpath("//span[normalize-space()='Select preferred payment']").click()
     cy.xpath("//div[@role='presentation']").contains('Cash').click().wait(2000)
