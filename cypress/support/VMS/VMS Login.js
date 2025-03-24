@@ -5,5 +5,5 @@ Cypress.Commands.add('VMS_User',()=>{
 Cypress.Commands.add('User_Login',()=>{
     cy.get('#\\:r0\\:-form-item').type('masudur.rahman+auto@vivasoftltd.com')
     cy.get('#\\:r1\\:-form-item > .relative > .flex').type('Admin001')
-    cy.get('.bg-red-500').click()
+    cy.get('.bg-red-500').click().wait(3000)
 })

@@ -3,7 +3,6 @@ describe('VMS ', () => {
         cy.VMS_User()
         cy.User_Login()
         cy.User_Create()
-
     })
 })
 

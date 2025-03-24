@@ -1,15 +1,27 @@
+const { defineConfig } = require("cypress");
+const { allureCypress } = require("allure-cypress/reporter");
 
-const {defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  projectId: '',
   chromeWebSecurity: false,
-  watchForFileChanges: true,
   experimentalStudio: true,
+  watchForFileChanges: true,
   experimentalWebKitSupport: false,
   experimentalMemoryManagement: true,
-  video: true,
+  video: false,
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'custom-title',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+    overwrite: false,
+    html: true,
+  },
   defaultCommandTimeout: 10000,
   pageLoadTimeout: 50000,
   viewportWidth:1920,
@@ -19,8 +31,14 @@ module.exports = defineConfig({
     openMode: 0,
   },
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
+    experimentalOriginDependencies: true,
+    experimentalRunAllSpecs: true,
+    video:true,
+    setupNodeEvents: (on, config) => {
+      allureCypress(on, {
+        resultsDir: "./allure-results",
+      });
+      return config;
     },
   },
 });
