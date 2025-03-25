@@ -7,22 +7,28 @@
 
 import {faker} from "@faker-js/faker";
 const firstname = faker.person.firstName('male')
+const lastName = faker.person.lastName('male')
+const companyName = faker.company.name()
+const phoneNumber = faker.phone.number({ style: 'national' })
+const currentAddress = faker.location.streetAddress({ useFullAddress: true })
 Cypress.Commands.add('User_Create',()=>{
-    cy.get(':nth-child(1) > div > .relative > .h-full > span').click() //
-    cy.get('.flex-row > .bg-red-500').click()
-    cy.xpath("//input[@name='firstName']").type(firstname) // firstname
-    cy.xpath ("//input[@name='lastName']"). type('Emon')
-    cy.xpath("//input[@name='companyName']").type('Vivasoft Ltd')
-    cy.xpath("//span[normalize-space()='Select department']").click()
-    cy.xpath("//div[@role='presentation']").contains('IT').click().wait(2000)
-    cy.xpath("//input[@name='email']").type(faker.internet.exampleEmail({allowSpecialCharacters: true}))
-    cy.xpath("//input[@name='phoneNumber']").type('01676260538')
-    cy.xpath("//span[normalize-space()='Select preferred payment']").click()
+    cy.contains('Users').click()
+    cy.contains('Add User').click()              //New User Create
+    cy.contains('First Name'). type(firstname)   // User First name
+    cy.contains('Last Name'). type(lastName)      // User Last name
+    //cy.xpath('//div[@class=\'flex items-center justify-center w-full h-full\']').selectFile('cypress/fixtures/VMS/Images/David_Backham.jpg');
+    //cy.wait(8000)
+    cy.contains ('Company Name'). type(companyName)                                                      // User Company Name
+    cy.contains('Select department').click()                                                             // User Department Select
+    cy.xpath("//div[@role='presentation']").contains('IT').click().wait(2000)      // User department Select
+    cy.contains('Email').type(faker.internet.exampleEmail({allowSpecialCharacters: true}))        // User Email
+    cy.contains('Phone Number').type(phoneNumber)                                                        // User Phone NUmber
+    cy.contains ('Select preferred payment') .click()                   // Payment Type
     cy.xpath("//div[@role='presentation']").contains('Cash').click().wait(2000)
-    cy.xpath("//input[@name='currentAddress']").type('abcdefghijaklmnopqrst')
-    cy.xpath("//span[normalize-space()='Select assigned vehicle']").click()
+    cy.contains('Current Address') .type(currentAddress)                                                  // Current Address
+    cy.contains ('Select assigned vehicle').click()                                                       // Vehicle Name
     cy.xpath("//div[@role='presentation']").contains('Car One').click()
-    cy.xpath("//span[normalize-space()='Select assigned driver']").click()
+    cy.contains('Select assigned driver').click()                                                           // Driver Name
     cy.xpath("//div[@role='presentation']").contains('Abdul Malek').click()
-    cy.xpath("//button[normalize-space()='Save']").click()
+    cy.contains ('Save').click()
 })
