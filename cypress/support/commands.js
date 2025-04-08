@@ -1,9 +1,11 @@
-import './VMS/VMS Login'
-import './VMS/User Create'
+import './VMS/VMSLogin'
+import './VMS/UserCreate'
 import 'xpath_cypress';
 import 'cypress-file-upload';
 import '@faker-js/faker'
 import 'cypress-wait-until';
 import "allure-cypress";
+
+
 
 
