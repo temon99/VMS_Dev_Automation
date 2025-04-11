@@ -7,7 +7,7 @@
 
 import { faker } from "@faker-js/faker";
 import UserCreate from "../../Pages/UserCreate";
-import tripsRequistion from "../../Pages/TripsRequistion";
+import tripsRequistion from "../../Pages/Trips";
 
 
 Cypress.Commands.add('User_Create', () => {
@@ -40,12 +40,5 @@ Cypress.Commands.add('User_Create', () => {
     vmsUser.actionButton()
     vmsUser.deleteUser()                                                   //Delete User
     vmsUser.clearSearch()
-
-    /*const trips= new tripsRequistion()
-    trips.selectTrips()
-    trips.newTrip()
-    trips.selectTripType()
-    trips.selectVehicleType()*/
-
 
 });

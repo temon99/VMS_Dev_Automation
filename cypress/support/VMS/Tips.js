@@ -1,8 +1,9 @@
-import tripsRequistion from "../../Pages/TripsRequistion";
+import trips from "../../Pages/Trips";
+import Trips from "../../Pages/Trips";
 Cypress.Commands.add('TripsRequistion', () => {
 
-    const trips= new tripsRequistion()
-    trips.selectTrips()
+    const trips = new Trips()
+   trips.selectTrips()
     trips.newTrip()
     trips.selectTripType()
     trips.selectVehicleType()
@@ -11,9 +12,9 @@ Cypress.Commands.add('TripsRequistion', () => {
     trips.selectRoute()
     trips.selectstartDate1()
     trips.selectEndDate1()
-    //trips.selectPickupPoint()
-    //trips.selectDropoffPoint()
+    trips.selectPickupPoint()
+    trips.selectDropoffPoint()
     trips.selectDriver1()
-   // trips.specialIns()
-   trips.saveThisTrip()
+    trips.specialIns()
+    trips.clickSaveButton()
     });

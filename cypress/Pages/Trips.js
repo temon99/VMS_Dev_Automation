@@ -1,23 +1,19 @@
-class TripsRequistion {
+class Trips {
     // Selectors
     tripsRequisition = ':nth-child(2) > div > .relative > .h-full > span'
     addNew = '.flex-row > .bg-red-500'
-    tripType = '//div[@role="presentation"]'
-    vehicleTypeSUV = '//div[@role="presentation"]'
-    vehicleTypeSedan = '//div[@id="radix-:r7t:"]'
-    vehicleSelectBMW = '//div[@role="presentation"]'
-    startDate = '//button[@aria-controls="radix-:rbt:"]'
+    tripType = '//div[@role="option"]'
+    vehicleTypeSUV = '//div[@role="option"]'
+    vehicleSelectBMW = '//div[@role="option"]'
     selectStartDate = '//button[normalize-space()="17"]'
-    endDate = '//button[@aria-controls="radix-:rbv:"]'
     selectEndDate = '//button[normalize-space()="24"]'
-    tripFor = '//div[@role="presentation"]'
-    route = '//div[@role="presentation"]'
-    pickupPoint = '#\\:r20\\:-form-item'
-    dropoffPoint = '#\\:r21\\:-form-item'
-    selectDriver = '//div[@role="presentation"]'
-    specialInstruction = '#\\:r24\\:-form-item'
-    saveTrip = '//button[normalize-space()=\'Save\']'
-    serviceDetails = '#radix-\\:r17\\:-trigger-2'
+    tripFor = '//div[@role="option"]'
+    route = '//div[@role="option"]'
+    pickupPoint = '//input[@name=\'pickupLocation\']'
+    dropoffPoint = '//input[@name=\'dropLocation\']'
+    selectDriver = '//div[@role="option"]'
+    specialInstruction = '//textarea[@name=\'specialInstruction\']'
+    saveTrip = '//*[@id="right-pane"]/div/button'
 
     // Common method for random selection
     _selectRandomOption(dropdownText, xpathSelector) {
@@ -26,7 +22,11 @@ class TripsRequistion {
             .should('be.visible')
             .then(($items) => {
                 const itemCount = $items.length;
+                cy.log(itemCount)
                 const randomIndex = Math.floor(Math.random() * itemCount);
+                cy.log(randomIndex)
+                const selectedText = $items[randomIndex].innerText.trim();
+                cy.log(`Selected Option: ${selectedText}`);
 
 // Wrap and click the random item
                 cy.wrap($items[randomIndex]).click();
@@ -83,29 +83,31 @@ class TripsRequistion {
     }
 
     selectPickupPoint() {
-        cy.get(this.pickupPoint).type('From Airport Terminal 3');
+        cy.xpath(this.pickupPoint).type('From Airport Terminal 3');
         return this;
     }
 
     selectDropoffPoint() {
-        cy.get(this.dropoffPoint).type('Hotel Sheraton');
+        cy.xpath(this.dropoffPoint).type('Hotel Sheraton');
         return this;
     }
 
     selectDriver1() {
         this._selectRandomOption('Select driver', this.selectDriver);
-        cy.wait(2000)
-        return this;
+        cy.contains('Save').click()
 
     }
 
     specialIns() {
-        cy.get(this.specialInstruction).type('Selling a car is a challenge, especially because vehicles');
-        cy.wait(2000)    }
+        cy.xpath(this.specialInstruction).type('Selling a car is a challenge, especially because vehicles');
+        cy.wait(2000)
+    }
 
-    saveThisTrip() {
-        cy.xpath('//button[normalize-space()=\'Save\'][contains(text(), "Save")]',{ timeout: 10000 }).click()
-        cy.wait(2000)}
+   clickSaveButton(Save){
+
+       cy.xpath(this.saveTrip).click()
+       return this;
+   }
 }
 
-export default TripsRequistion;
+export default Trips;
