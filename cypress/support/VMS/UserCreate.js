@@ -14,6 +14,7 @@ Cypress.Commands.add('User_Create', () => {
     // Generate fresh data each time the command runs
     const firstname = faker.person.firstName('male');
     const lastName = faker.person.lastName('male');
+    const middleName = faker.person.middleName('male')
     const companyName = faker.company.name();
     const phoneNumber = faker.phone.number({ style: 'national' });
     const currentAddress = faker.location.streetAddress({ useFullAddress: true });
@@ -37,6 +38,11 @@ Cypress.Commands.add('User_Create', () => {
     vmsUser.selectDriver()                                                 // Driver Name
     vmsUser.userSave()
     vmsUser.userSearch(firstname + "  " + lastName)                 //Search User
+    vmsUser.clickOnName(firstname + " " + lastName)
+    vmsUser.middleName(middleName)
+    vmsUser.currentAddress()
+    vmsUser.userSave()
+    vmsUser.userSearch(firstname + middleName + lastName)
     vmsUser.actionButton()
     vmsUser.deleteUser()                                                   //Delete User
     vmsUser.clearSearch()

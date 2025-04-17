@@ -18,10 +18,6 @@ class UserCreate {
         cy.contains('First Name').type(firstName)
     }
 
-    middleName(middleName) {
-        cy.contains('Middle Name').type(middleName)
-    }
-
     lastName(lastName) {
         cy.contains('Last Name').type(lastName)
     }
@@ -75,6 +71,16 @@ class UserCreate {
         cy.wait(2000)
     }
 
+    clickOnName(Name) {
+        cy.contains(Name).click({force: true})
+        cy.wait(6000)
+    }
+
+
+    middleName(middleName) {
+        cy.contains('Middle Name').type(middleName)
+    }
+
     actionButton(actionButton) {
         cy.get('.ml-0 > .inline-flex').click()
         cy.wait(2000)
@@ -89,6 +95,7 @@ class UserCreate {
         cy.get('.gap-3 > .items-center > .relative > .flex').clear()
         cy.wait(2000)
     }
+
 }
 export default UserCreate
 
