@@ -19,6 +19,8 @@ describe('API Wait Test', function() {
         vms1.clickUser();
 
         cy.contains('Mustafizur Rahman').click();
+        cy.reload(true);
+        cy.contains('Mustafizur Rahman').click();
 
         // Only wait for the requests you’re sure will fire
         cy.wait('@getStaffList');
@@ -30,7 +32,6 @@ describe('API Wait Test', function() {
         cy.wait('@getEmployeeById');
         cy.wait('@getDriverList');
 
-        cy.contains('Mustafizur Rahman').click();
     });
 });
 
