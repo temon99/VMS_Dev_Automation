@@ -39,10 +39,9 @@ Cypress.Commands.add('User_Create', () => {
     vmsUser.userSave()
     vmsUser.userSearch(firstname + "  " + lastName)                 //Search User
     vmsUser.clickOnName(firstname + " " + lastName)
-    vmsUser.middleName(middleName)
-    vmsUser.currentAddress()
+    vmsUser.middleName(middleName)                                         // Edit User Name
     vmsUser.userSave()
-    vmsUser.userSearch(firstname + middleName + lastName)
+    vmsUser.userSearch(firstname +" " + middleName + " "+ lastName)
     vmsUser.actionButton()
     vmsUser.deleteUser()                                                   //Delete User
     vmsUser.clearSearch()

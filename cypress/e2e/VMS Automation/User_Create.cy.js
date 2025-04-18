@@ -4,6 +4,5 @@ describe('User_create', () => {
         cy.VMS_site_load()
         cy.User_Login()
         cy.User_Create()
-
     })
 })

@@ -10,10 +10,6 @@ class ServiceDetails {
     Discount = '//input[@name=\'tripCharges.0.discount\']'
     saveButton = '//button[contains(@class, \'bg-red-500\') and normalize-space()=\'Save\']'
 
-
-
-
-
     clickServiceDetails(serviceDetails) {
         cy.xpath(this.serviceDetails).click();
         return this;

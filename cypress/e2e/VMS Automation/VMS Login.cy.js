@@ -5,5 +5,6 @@ describe('VMS ', () => {
         cy.User_Create()
         cy.TripsRequistion()
         cy.ServiceDetails()
+        cy.Vehicle()
     })
 })

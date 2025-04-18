@@ -1,7 +1,9 @@
 import trips from "../../Pages/Trips";
 import Trips from "../../Pages/Trips";
+import { faker } from "@faker-js/faker";
 Cypress.Commands.add('TripsRequistion', () => {
-
+    const pickUpPoint = faker.location.streetAddress({ useFullAddress: true })
+    const dropOffPoint = faker.location.streetAddress({ useFullAddress: true });
     const trips = new Trips()
    trips.selectTrips()
     trips.newTrip()
@@ -12,8 +14,8 @@ Cypress.Commands.add('TripsRequistion', () => {
     trips.selectRoute()
     trips.selectstartDate1()
     trips.selectEndDate1()
-    trips.selectPickupPoint()
-    trips.selectDropoffPoint()
+    trips.selectPickupPoint(pickUpPoint)
+    trips.selectDropoffPoint(dropOffPoint)
     trips.selectDriver1()
     trips.specialIns()
     trips.clickSaveButton()

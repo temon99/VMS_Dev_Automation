@@ -7,6 +7,7 @@ import 'cypress-wait-until';
 import "allure-cypress";
 import './VMS/Tips'
 import './VMS/ServiceDetails'
+import './VMS/NewVehicle'
 
 
 
