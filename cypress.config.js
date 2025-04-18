@@ -22,6 +22,7 @@ module.exports = defineConfig({
     overwrite: false,
     html: true,
   },
+
   defaultCommandTimeout: 10000,
   pageLoadTimeout: 50000,
   viewportWidth:1920,
