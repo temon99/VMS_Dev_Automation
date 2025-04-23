@@ -5,7 +5,7 @@ class LoginPage {
     setPassword(password){
         cy.get('#\\:r1\\:-form-item > .relative > .flex').type(password)
     }
-   clickLogin(login){
+    clickLogin(){
         cy.get('.bg-red-500').click()
     }
 }

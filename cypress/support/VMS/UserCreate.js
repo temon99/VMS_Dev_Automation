@@ -7,7 +7,6 @@
 
 import { faker } from "@faker-js/faker";
 import UserCreate from "../../Pages/UserCreate";
-import tripsRequistion from "../../Pages/Trips";
 
 
 Cypress.Commands.add('User_Create', () => {
