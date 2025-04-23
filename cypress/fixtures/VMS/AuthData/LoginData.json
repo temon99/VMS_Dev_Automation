@@ -1,0 +1,21 @@
+{
+  "sideloading":{
+    "siteURL": "http://52.29.121.231:3002/auth/login",
+    "homeurl": "http://52.29.121.231:3002/"
+  },
+
+  "Admin":{
+    "Masudur_Rahman": {
+      "user_email": "masudur.rahman+auto@vivasoftltd.com",
+      "user_password": "Admin001"
+    },
+    "User2": {
+      "user_email": "",
+      "user_password": ""
+    },
+    "User3": {
+      "user_email": "",
+      "user_password": ""
+    }
+  }
+}
