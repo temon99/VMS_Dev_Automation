@@ -5,8 +5,9 @@ class Trips {
     tripType = '//div[@role="option"]'
     vehicleTypeSUV = '//div[@role="option"]'
     vehicleSelectBMW = '//div[@role="option"]'
-    selectStartDate = '//button[normalize-space()="17"]'
-    selectEndDate = '//button[normalize-space()="24"]'
+    randomDateSelect = '//button[@name=\'day\' and not(contains(@class, \'day-outside\'))]'
+    randomTimeSelect = '//button[@role="combobox" and .//span[contains(text(), "00:00")]]'
+    selectTimeOptions= '[role="option"]'
     tripFor = '//div[@role="option"]'
     route = '//div[@role="option"]'
     pickupPoint = '//input[@name=\'pickupLocation\']'
@@ -14,6 +15,7 @@ class Trips {
     selectDriver = '//div[@role="option"]'
     specialInstruction = '//textarea[@name=\'specialInstruction\']'
     saveTrip = '//*[@id="right-pane"]/div/button'
+
     // Common method for random selection
     _selectRandomOption(dropdownText, xpathSelector) {
         cy.contains(dropdownText).click();
@@ -26,9 +28,25 @@ class Trips {
                 cy.log(randomIndex)
                 const selectedText = $items[randomIndex].innerText.trim();
                 cy.log(`Selected Option: ${selectedText}`);
-
 // Wrap and click the random item
                 cy.wrap($items[randomIndex]).click();
+            });
+    }
+    //Common method for random date selection
+    selectRandomDate(xpathSelector1) {
+        cy.xpath(xpathSelector1)
+            .then($days => {
+                const randomDay = $days[Math.floor(Math.random() * $days.length)];
+                cy.wrap(randomDay).click();
+            });
+    }
+    //Common method for random time selection
+    selectRandomTime(xpathSelector2){
+        cy.xpath(xpathSelector2).click()
+        cy.get(this.selectTimeOptions)
+            .then($times => {
+                const randomTime = $times[Math.floor(Math.random() * $times.length)];
+                cy.wrap(randomTime).click();
             });
     }
     selectTrips() {
@@ -59,15 +77,21 @@ class Trips {
         this._selectRandomOption('Select route', this.route);
         return this;
     }
-    selectstartDate1() {
+    selectstartDate(){
         cy.contains('Enter Date Time').click();
-        cy.xpath(this.selectStartDate).click();
+        this.selectRandomDate(this.randomDateSelect)
+            cy.wait(500)
+        this.selectRandomTime((this.randomTimeSelect))
+        cy.wait(1000)
         cy.contains('Start Date & Time'). click();
         return this;
     }
-    selectEndDate1() {
+    selectEndDate(){
         cy.contains('Select...').click();
-        cy.xpath(this.selectEndDate).click();
+        this.selectRandomDate(this.randomDateSelect)
+            cy.wait(500)
+        this.selectRandomTime((this.randomTimeSelect))
+        cy.wait(1000)
         cy.contains('End Date & Time'). click();
         return this;
     }
@@ -84,8 +108,8 @@ class Trips {
         cy.contains('Save').click()
 
     }
-    specialIns() {
-        cy.xpath(this.specialInstruction).type('Selling a car is a challenge, especially because vehicles');
+    specialIns(specialInss) {
+        cy.xpath(this.specialInstruction).type(specialInss);
         cy.wait(2000)
     }
     clickSaveButton(Save){

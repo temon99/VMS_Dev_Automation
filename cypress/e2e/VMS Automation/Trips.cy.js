@@ -5,5 +5,6 @@ describe('User_create', () => {
         cy.TripsRequistion()
         cy.ServiceDetails()
 
+
     })
 })

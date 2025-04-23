@@ -1,37 +1,50 @@
-/* ==== Test Created with Cypress Studio ==== */
-import UserCreate from "../../Pages/UserCreate";
+import Trips from "../../Pages/Trips";
 
-describe('API Wait Test', function() {
-    it('test', function() {
-        // Intercepts — set before visit or interaction
-        cy.intercept('POST', '**/api/Employees/GetStaffList').as('getStaffList');
-        cy.intercept('POST', '**/api/Departments/Getselectlist').as('getDepartments');
-        cy.intercept('POST', '**/api/Vehicles/Getselectlist').as('getVehicles');
-        cy.intercept('POST', '**/api/PaymentTypes/Getselectlist').as('getPaymentTypes');
-        cy.intercept('GET', '**/api/Employees/GetById/12').as('getEmployeeById');
-        cy.intercept('POST', '**/api/Employees/GetDriverSelectlist').as('getDriverList');
+describe('VMS ', () => {
+    it('http://52.29.121.231:3002/auth/login', () => {
+        cy.VMS_site_load()
+        cy.User_Login()
+        const trips = new Trips()
 
-        // Load site and login
-        cy.VMS_site_load();
-        cy.User_Login();
+        trips.selectTrips()
+        trips.newTrip()
 
-        const vms1 = new UserCreate();
-        vms1.clickUser();
+// Select random date from calendar
+        const selectRandomDate = () => {
+            cy.xpath("//button[@name='day' and not(contains(@class, 'day-outside'))]")
+                .should('have.length.gt', 0) // Ensure days are found
+                .then(($days) => {
+                    const randomIndex = Math.floor(Math.random() * $days.length);
+                    const randomDay = $days[randomIndex];
+                    cy.wrap(randomDay)
+                        .click();
+                    return cy.wrap(randomDay);
+                });
+        };
 
-        cy.contains('Mustafizur Rahman').click();
-        //cy.reload(true);
-        //cy.contains('Mustafizur Rahman').click();
+// Select random time from dropdown
+        const selectRandomTime = () => {
+            cy.get('[role="option"]') // Time options
+                .then($times => {
+                    const randomTime = $times[Math.floor(Math.random() * $times.length)];
+                    cy.wrap(randomTime).click();
+                });
+        };
 
-        // Only wait for the requests you’re sure will fire
-        cy.wait('@getStaffList');
-        cy.wait('@getDepartments');
-        cy.wait('@getVehicles');
+// Usage
 
-        // Optional: Only wait for these if they're fired after clickUser()
-        cy.wait('@getPaymentTypes');
-        cy.wait('@getEmployeeById');
-        cy.wait('@getDriverList');
+            // Open date picker
+            cy.contains('Enter Date Time').click();
 
-    });
-});
+            // Select random date
+        selectRandomDate()
 
+            // Open time picker
+            cy.xpath('//button[@role="combobox" and .//span[contains(text(), "00:00")]]').click(); // Or target time input field
+
+            // Select random time
+            selectRandomTime();
+
+
+    })
+})
