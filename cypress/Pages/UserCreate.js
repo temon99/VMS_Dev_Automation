@@ -18,10 +18,10 @@ class UserCreate {
                 cy.wrap($items[randomIndex]).click();
             });
     }
-    clickUser(user){
+    clickUser(){
         cy.contains('Users').click()
     }
-    clickAdd(addUser){
+    clickAdd(){
         cy.contains('Add User').click()
     }
     uploadAvatar(Avatar){
@@ -37,9 +37,8 @@ class UserCreate {
     companyName(companyName) {
         cy.contains('Company Name').type(companyName)
     }
-    selectDepartment(Department) {
-        cy.contains('Select department').click();                                                        // User Department Select
-        cy.xpath("//div[@role='presentation']").contains('IT').click()
+    selectDepartment() {
+        this._selectRandomOption('Select department','//div[@role=\'presentation\']')        // User Department Select
         cy.wait(2000)
 
     }
@@ -49,25 +48,25 @@ class UserCreate {
     phoneNumber(phoneNumber) {
         cy.contains('Phone Number').type(phoneNumber);
     }
-    selectPayment(payment) {
+    selectPayment() {
         this._selectRandomOption('Select preferred payment','//div[@role="option"]');
         return this;
     }
-   currentAddress(Address) {
+    currentAddress(Address) {
        cy.contains('Current Address').type(Address)
        cy.wait(2000)
     }
-    selectVehicle(Vehicle) {
+    selectVehicle() {
         this._selectRandomOption('Select assigned vehicle','//div[@role="option"]');
         return this;
     }
-    selectDriver(Driver) {
+    selectDriver() {
         this._selectRandomOption('Select assigned driver','//div[@role="option"]');
-        return this;
         cy.contains('Assigned Driver').click()
         cy.wait(500)
+        return this;
     }
-    userSave(Save) {
+    userSave() {
         cy.contains('Save').click();
         cy.wait(2000)
     }
@@ -84,15 +83,15 @@ class UserCreate {
     middleName(middleName) {
         cy.contains('Middle Name').type(middleName)
     }
-    actionButton(actionButton) {
+    actionButton() {
         cy.get('.ml-0 > .inline-flex').click()
         cy.wait(2000)
     }
-    deleteUser(Delete) {
+    deleteUser() {
         cy.xpath("//button[normalize-space()='Delete']").click()
         cy.wait(2000)
     }
-    clearSearch(clearSearch) {
+    clearSearch() {
         cy.get('.gap-3 > .items-center > .relative > .flex').clear()
         cy.wait(2000)
     }

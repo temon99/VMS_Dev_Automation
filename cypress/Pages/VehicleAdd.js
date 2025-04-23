@@ -52,7 +52,7 @@ class VehicleAdd{
     selectMenu(){
         cy.xpath(this.vehicleMenu).click()
     }
-    addVehicleButton(addVehicle){
+    addVehicleButton(){
         cy.xpath(this.addVehicle).click()
         cy.wait(3000)
     }
@@ -63,7 +63,7 @@ class VehicleAdd{
     vehicleName(){
         cy.contains('Vehicle Name').type(this.carName())
     }
-    selectStatus(Status){
+    selectStatus(){
         this._selectRandomOption('Select current status', this.commonDropdownXpath)
         return this
     }

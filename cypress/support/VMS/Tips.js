@@ -1,6 +1,7 @@
 import Trips from "../../Pages/Trips";
 import { faker } from "@faker-js/faker";
 Cypress.Commands.add('TripsRequistion', () => {
+
     const pickUpPoint = faker.location.streetAddress({ useFullAddress: true })
     const dropOffPoint = faker.location.streetAddress({ useFullAddress: true });
     const specialInstruction = faker.lorem.lines({ min: 2, max: 4 })
